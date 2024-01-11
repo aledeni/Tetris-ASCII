@@ -24,7 +24,7 @@ int gen_random_number(int min, int max) {
     return rand()%(max-min+1)+min;
 }
 
-bool check_collision(WINDOW *win, Grid &g, Tetramino &t) {
+bool check_collision(Grid &g, Tetramino &t) {
     bool collision = false;
     int tipo {t.get_tetramino()}, x {t.get_start_x()}, y {t.get_start_y()};
     char (*m)[COLS] = g.get_grid();
@@ -84,17 +84,19 @@ int main(int argc, char *argv[]) {
     Tetramino t;
     while(!end_game) {
         t = Tetramino();
-        t.draw_tetramino(win, 0, gen_random_number(START_POINT, END_POINT));
-        while(!check_collision(win, g, t)) {
-            std::this_thread::sleep_for(std::chrono::milliseconds(1000));
-            t.move_tetramino(win);
+        if(t.draw_tetramino(g, 0, gen_random_number(START_POINT, END_POINT), win)) {
+            while(!check_collision(g, t)) {
+                std::this_thread::sleep_for(std::chrono::milliseconds(1000));
+                t.move_tetramino(g, win);
+            }
         }
-        end_game = true;
+        else {
+            end_game = true;
+        }
     }
 
     mvprintw(35, 5, "GAME OVER, press any key to exit...");
     time_future.get();
-    refresh();
     getch();
     endwin();
     /* NCURSES END */

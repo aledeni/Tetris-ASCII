@@ -4,6 +4,7 @@
 #include <ncurses.h>
 #include <cstdlib>
 #include <ctime>
+#include "Grid.hpp"
 
 #define START_POINT 2
 #define END_POINT 21
@@ -19,8 +20,8 @@ public:
     int get_tetramino();
     int get_start_x();
     int get_start_y();
-    void draw_tetramino(WINDOW *, int, int);
-    void move_tetramino(WINDOW *);
+    bool draw_tetramino(Grid &, int, int, WINDOW *);
+    void move_tetramino(Grid &, WINDOW *);
     ~Tetramino() = default;
 };
 

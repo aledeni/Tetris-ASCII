@@ -37,10 +37,10 @@ void Grid::draw_grid(WINDOW *win, int start_y, int start_x) {
     for(int i = 0; i < ROWS; i++) {
         for(int j = 0; j < COLS; j++) {
             mvwprintw(win, start_y, start_x, "%c", grid[i][j]);
-            wrefresh(win);
             start_x++;
         }
         start_x = init_start_x;
         start_y++;
     }
+    wrefresh(win);
 }
