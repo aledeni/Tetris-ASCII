@@ -43,7 +43,7 @@ bool check_collision(Grid &g, Tetramino &t) {
         }
     }
     else if(tipo == 2) {
-        for(int i = x; i <= x+7; i++) {
+        for(int i = x; i <= x+3; i++) {
             if(m[y+2][i] == '[' || m[y+2][i] == ']' || m[y+2][i] == '*') {
                 collision = true;
             }
