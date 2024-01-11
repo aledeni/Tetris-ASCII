@@ -59,11 +59,13 @@ int main(int argc, char *argv[]) {
     noecho();
     keypad(stdscr, true);
     curs_set(0);
+    nodelay(stdscr, true);
 
     // Variables
     srand(time(0));
     int height {30}, width {30}, start_y {2}, start_x {30};
     int full_lines {0}, score {0}, elapsed_seconds {0};
+    int input_ch;
     bool end_game = false;
 
     // Score and time
@@ -86,8 +88,19 @@ int main(int argc, char *argv[]) {
         t = Tetramino();
         if(t.draw_tetramino(g, 0, gen_random_number(START_POINT, END_POINT), win)) {
             while(!check_collision(g, t)) {
-                std::this_thread::sleep_for(std::chrono::milliseconds(1000));
-                t.move_tetramino(g, win);
+                std::this_thread::sleep_for(std::chrono::milliseconds(500));
+                input_ch = getch();
+                switch (input_ch) {
+                case KEY_RIGHT:
+                    t.move_right_tetramino(g, win);
+                    break;
+                case KEY_LEFT:
+                    t.move_left_tetramino(g, win);
+                    break;
+                default:
+                    t.move_down_tetramino(g, win);
+                    break;
+                }
             }
         }
         else {
@@ -97,6 +110,7 @@ int main(int argc, char *argv[]) {
 
     mvprintw(35, 5, "GAME OVER, press any key to exit...");
     time_future.get();
+    nodelay(stdscr, false);
     getch();
     endwin();
     /* NCURSES END */

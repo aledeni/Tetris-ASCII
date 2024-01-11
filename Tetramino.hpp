@@ -21,7 +21,9 @@ public:
     int get_start_x();
     int get_start_y();
     bool draw_tetramino(Grid &, int, int, WINDOW *);
-    void move_tetramino(Grid &, WINDOW *);
+    void move_down_tetramino(Grid &, WINDOW *);
+    void move_right_tetramino(Grid &g, WINDOW *win);
+    void move_left_tetramino(Grid &g, WINDOW *win);
     ~Tetramino() = default;
 };
 

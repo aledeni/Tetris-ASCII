@@ -93,7 +93,7 @@ bool Tetramino::draw_tetramino(Grid &g, int y, int x, WINDOW *win) {
     return true;
 }
 
-void Tetramino::move_tetramino(Grid &g, WINDOW *win) {
+void Tetramino::move_down_tetramino(Grid &g, WINDOW *win) {
     char (*m)[COLS] = g.get_grid();
     int x = {start_x}, y {start_y};
     if(tetramino == 0) {
@@ -168,4 +168,12 @@ void Tetramino::move_tetramino(Grid &g, WINDOW *win) {
     }
     this->start_y++;
     g.draw_grid(win, 0, 0);
+}
+
+void Tetramino::move_right_tetramino(Grid &g, WINDOW *win) {
+
+}
+
+void Tetramino::move_left_tetramino(Grid &g, WINDOW *win) {
+
 }
