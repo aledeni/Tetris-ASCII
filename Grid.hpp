@@ -9,11 +9,13 @@
 class Grid {
 private:
     char grid[ROWS][COLS];
+    void delete_lines(WINDOW *, int);
 
 public:
     Grid();
     char (*get_grid())[COLS];
     void draw_grid(WINDOW *, int, int);
+    void check_grid(WINDOW *);
     ~Grid() = default;
 };
 

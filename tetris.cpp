@@ -87,6 +87,7 @@ int main(int argc, char *argv[]) {
     while(!end_game) {
         t = Tetramino();
         if(t.draw_tetramino(g, 0, gen_random_number(START_POINT, END_POINT), win)) {
+            g.check_grid(win);
             while(!check_collision(g, t)) {
                 std::this_thread::sleep_for(std::chrono::milliseconds(500));
                 input_ch = getch();
